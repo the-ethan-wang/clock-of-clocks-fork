@@ -192,3 +192,13 @@ export const cell = (value: string, index: number, small: boolean) => {
 
   return rotation[" "];
 };
+
+export const setDigitSize = (small: boolean) => {
+  if (small) {
+    document.documentElement.style.setProperty('--column', `2`);
+    document.documentElement.style.setProperty('--row', `3`);
+  } else {
+    document.documentElement.style.setProperty('--column', `4`);
+    document.documentElement.style.setProperty('--row', `6`);
+  }
+};

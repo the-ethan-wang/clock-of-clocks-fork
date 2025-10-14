@@ -1,7 +1,9 @@
 import { Cell } from "$src/components/cell";
 import { El } from "$src/components/element";
-
+import { setDigitSize } from '$src/utilities/digit';
 import { cell } from "$src/utilities/digit";
+
+
 
 class DigitComponent {
   create(index: number, small: boolean) {
@@ -19,13 +21,7 @@ class DigitComponent {
 
   tick(digit: HTMLElement, value: string, small: boolean, loading: boolean=false) {
     
-    if (small) {
-      document.documentElement.style.setProperty('--column', `2`);
-      document.documentElement.style.setProperty('--row', `3`);
-    } else {
-      document.documentElement.style.setProperty('--column', `4`);
-      document.documentElement.style.setProperty('--row', `6`);
-    }
+    setDigitSize(small);
     const targetSize = small ? 6 : 24;
     let currentChildren = El.children(digit);
     let currentSize = currentChildren.length;
