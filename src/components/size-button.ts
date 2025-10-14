@@ -30,6 +30,8 @@ export class SizeButton {
     for (let i = 0; i < size; i++) {
       const cell = Cell.create(i);
       const symbol = symbols[i % symbols.length];
+
+
       Cell.tick(
         cell,
         [
@@ -38,6 +40,7 @@ export class SizeButton {
         ],
         false
       );
+      
       el.appendChild(cell);
     }
 
