@@ -1,4 +1,4 @@
-import { Dot } from "$src/components/dot";
+
 import { El } from "$src/components/element";
 import { Hand } from "$src/components/hand";
 
@@ -8,7 +8,7 @@ class CellComponent {
       type: "div", 
       classes: "cell", 
       data: { index },
-      children: [Hand.create(), Hand.create(), Dot.create()]
+      children: [Hand.create(), Hand.create()]
     });
   }
 

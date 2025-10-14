@@ -2,8 +2,6 @@
   --field-gap: 2rem;
   --cell-size: 3rem;
   --cell-border-size: max(calc(var(--cell-size) / 16), 1.5px);
-  --cell-background-color: oklch(0% 0 0);
-  --cell-border-color: oklch(0% 0 0);
   --hand-color: oklch(94.75 100.1916 119.15);
 }
 
@@ -48,8 +46,6 @@ body {
   height: var(--cell-size);
   width: var(--cell-size);
   position: relative;
-  background-color: var(--cell-background-color);
-  border: var(--cell-border-size) solid var(--cell-border-color);
   border-radius: 1000px;
 }
 
@@ -64,17 +60,6 @@ body {
   translate: 0% -50%;
   rotate: 135deg;
   transition: rotate 250ms;
-}
-
-.cell > .dot {
-  width: var(--cell-border-size);
-  height: var(--cell-border-size);
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  translate: -50% -50%;
-  background-color: var(--hand-color);
-  border-radius: 1000px;
 }
 
 @media (max-width: 1440px) {
