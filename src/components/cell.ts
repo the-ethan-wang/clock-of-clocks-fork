@@ -12,9 +12,13 @@ class CellComponent {
     });
   }
 
-  tick(cell: HTMLElement, rotation: number[]) {
+  tick(cell: HTMLElement, rotation: number[], loading: boolean = false) {
     El.children(cell)
-      .map((hand, index) => Hand.tick(hand, rotation[index]));
+      .map((hand, index) => {
+        if (index < 2) {
+          Hand.tick(hand, rotation[index], loading, index);
+        }
+      });
   }
 }
 

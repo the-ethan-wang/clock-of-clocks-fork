@@ -4,16 +4,16 @@ import { Field } from "$src/components/field";
 import type { Time } from "$src/types/time";
 
 class ClockComponent {
-  create() {
-    const children = [Field.create("hours"), Field.create("minutes"), Field.create("seconds")];
+  create(small: boolean) {
+    const children = [Field.create("hours", small), Field.create("minutes", small), Field.create("seconds", small)];
 
     return El.create({ type: "div", classes: "clock", children });
   }
 
-  tick(time: Time) {
-    Field.tick("hours", time.hours);
-    Field.tick("minutes", time.minutes);
-    Field.tick("seconds", time.seconds);
+  tick(time: Time, small: boolean, loading: boolean=false) {
+    Field.tick("hours", time.hours, small, loading);
+    Field.tick("minutes", time.minutes, small, loading);
+    Field.tick("seconds", time.seconds, small, loading);
 
     return time;
   }

@@ -1,12 +1,12 @@
 :root {
   --field-gap: 2rem;
-
+  --column: 2;
+  --row: 3;
   --cell-size: 3rem;
   --cell-border-size: max(calc(var(--cell-size) / 16), 1.5px);
-  --cell-background-color: oklch(20% 0 0);
-  --cell-border-color: oklch(30% 0 0);
-
-  --hand-color: oklch(94.75% 0.1916 119.15);
+  --cell-background-color: oklch(0% 0 0); /* 20 30 */
+  --cell-border-color: oklch(0% 0 0);
+  --hand-color: oklch(94.75 100.1916 119.15);
 }
 
 * {
@@ -39,8 +39,8 @@ body {
 
 .digit {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(6, 1fr);
+  grid-template-columns: repeat(var(--column), 1fr); // 2x3, 4x6
+  grid-template-rows: repeat(var(--row), 1fr);
   gap: 0.125rem;
 }
 

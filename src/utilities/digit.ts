@@ -2,16 +2,21 @@ import { DigitKey } from "$src/types/digit";
 import { RotationKey } from "$src/types/rotation";
 
 export const rotation = {
+  "/|": [90, 90],
+  "|/": [270, 270],
+  "/-": [0, 0],
+  "-/": [180, 180],
   " ": [135, 135],
   "┘": [180, 270],
   "└": [0, 270],
   "┐": [90, 180],
   "┌": [0, 90],
   "-": [0, 180],
-  "|": [90, 270]
+  "|": [90, 270],
+  "?": [Math.random()*360, Math.random()*360]
 }
 
-export const digits = {
+export const big_digits = {
   "0": [
     "┌", "-", "-", "┐",
     "|", "┌", "┐", "|",
@@ -100,12 +105,84 @@ export const digits = {
     "└", "-", "┐", "|",
     "┌", "-", "┘", "|",
     "└", "-", "-", "┘",
+  ],
+
+  ":": [
+    " ", " ", " ", " ",
+    " ", "┌", "┐", " ",
+    " ", "└", "┘", " ",
+    " ", "┌", "┐", " ",
+    " ", "└", "┘", " ",
+    " ", " ", " ", " ",
   ]
 }
 
-export const cell = (value: string, index: number) => {
-  const digit = digits[value as DigitKey];
+export const small_digits = {
+    "0": [
+    "┌",  "┐",
+    "|",  "|",
+    "└",  "┘",
+  ],
 
+  "1": [
+    " ", "/|",
+    " ", "|", 
+    " ", "|/", 
+  ],
+
+  "2": [
+    "/-", "┐",
+    "┌", "┘",
+    "└", "-/",
+  ],
+
+  "3": [
+    "/-", "┐",
+    "/-", "┘",
+    "/-", "┘",
+  ],
+
+  "4": [
+    "/|", "/|",
+    "└", "|", 
+    " ", "|/",
+  ],
+
+  "5": [
+    "┌", "-/", 
+    "└", "┐",
+    "/-", "┘"
+  ],
+
+  "6": [
+    "┌", "-/", 
+    "|", "┐",
+    "└", "┘"
+  ],
+
+  "7": [
+    "/-", "┐",
+    " ", "|",
+    " ", "|/",
+  ],
+
+  "8": [
+    "┌", "┐",
+    "└", "┘",
+    "└", "┘"
+  ],
+
+  "9": [
+    "┌", "┐",
+    "└", "|",
+    "/-", "┘",
+  ]
+}
+
+export const cell = (value: string, index: number, small: boolean) => {
+  let digit
+  if (small) {digit = small_digits[value as DigitKey];}
+  else {digit = big_digits[value as DigitKey];}
   if(digit) {
     const symbol = digit[index] as RotationKey;
 
