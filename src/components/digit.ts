@@ -45,7 +45,8 @@ class DigitComponent {
       }
     }
     if (!loading)
-    {document.documentElement.style.setProperty('--hand-color', `oklch(${Math.random()} 1.0 ${Math.random()*360})`);}
+      
+    {setTimeout(function() {document.documentElement.style.setProperty('--hand-color', `oklch(${Math.random()} 1.0 ${Math.random()*360})`);}, 0);}
 
     El.children(digit)
       .map((node, index) => Cell.tick(node, cell(value, index, small), loading));

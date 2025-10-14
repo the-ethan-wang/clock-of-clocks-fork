@@ -180,16 +180,15 @@ export const small_digits = {
 }
 
 export const cell = (value: string, index: number, small: boolean) => {
-  let digit
-  if (small) {digit = small_digits[value as DigitKey];}
-  else {digit = big_digits[value as DigitKey];}
-  if(digit) {
+  const big = big_digits as Record<DigitKey, string[]>;
+  const smallMap = small_digits as Record<DigitKey, string[]>;
+  const digitMap = small ? smallMap : big;
+  const digit = digitMap[value as DigitKey];
+  if (digit) {
     const symbol = digit[index] as RotationKey;
-
     const pair = rotation[symbol];
-
-    if(pair) return pair;
+    if (pair) return pair;
   }
 
   return rotation[" "];
-}
+};
