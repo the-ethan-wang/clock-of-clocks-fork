@@ -106,15 +106,6 @@ export const big_digits = {
     "┌", "-", "┘", "|",
     "└", "-", "-", "┘",
   ],
-
-  ":": [
-    " ", " ", " ", " ",
-    " ", "┌", "┐", " ",
-    " ", "└", "┘", " ",
-    " ", "┌", "┐", " ",
-    " ", "└", "┘", " ",
-    " ", " ", " ", " ",
-  ]
 }
 
 export const small_digits = {
@@ -177,6 +168,11 @@ export const small_digits = {
     "└", "|",
     "/-", "┘",
   ]
+}
+
+export const button_rots = {
+  "S": ["┌", "┐", "└", "┘"],
+  "L" : ["┌", "-", "┐", "|", " ", "|", "└", "-", "┘"]
 }
 
 export const cell = (value: string, index: number, small: boolean) => {

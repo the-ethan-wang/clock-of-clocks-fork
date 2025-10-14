@@ -4,6 +4,7 @@ import { El } from "$src/components/element";
 import { equal, now } from "$src/utilities/time";
 import type { Time } from "$src/types/time";
 import { rotation } from "$src/utilities/digit";
+import { button_rots } from "$src/utilities/digit";
 
 class App {
   time: Time = now();
@@ -12,38 +13,29 @@ class App {
   btn?: HTMLElement;
 
   init() {
-    // create clock container
     const clockContainer = document.createElement("div");
     clockContainer.id = "clock-container";
     El.append("app", clockContainer);
 
-    // create main clock
     this.mainClock = Clock.create(this.small);
     El.append("clock-container", this.mainClock);
-
-    // create toggle button
     this.createToggleButton();
-
-    // initial main clock animation
     Clock.tick(this.time, this.small, true);
-
-    // start live ticking
     setTimeout(() => this.tick(), 2000);
   }
 
   createToggleButton() {
-    // remove old button if exists
     if (this.btn) this.btn.remove();
 
-    const size = this.small ? 4 : 9; // small = 2x2, big = 3x3
-    const symbols = this.small ? ["┌", "┐", "└", "┘"] : ["┌", "-", "┐", "|", " ", "|", "└", "-", "┘"] ; // we’ll reuse for all cells
+    const size = this.small ? 4 : 9;
+    const symbols = this.small ? button_rots["S"] : button_rots["L"] ; 
 
     this.btn = El.create({
       type: "div",
       classes: "toggle-button",
       children: Array.from({ length: size }, (_, i) => {
         const cell = Cell.create(i);
-        const symbol = symbols[i % symbols.length]; // repeat symbols if needed
+        const symbol = symbols[i % symbols.length];
         Cell.tick(cell, [rotation[symbol as keyof typeof rotation][0], rotation[symbol as keyof typeof rotation][1]], false);
         return cell;
       })
@@ -69,8 +61,6 @@ class App {
 
       // animate main clock on toggle
       Clock.tick(this.time, this.small, true);
-
-      // recreate button with new size
       this.createToggleButton();
     };
   }
@@ -78,12 +68,12 @@ class App {
   interval() {
     const time = now();
     if (!equal(time, this.time)) {
-      this.time = Clock.tick(time, this.small); // live update
+      this.time = Clock.tick(time, this.small); 
     }
   }
 
   tick() {
-    Clock.tick(this.time, this.small); // live update
+    Clock.tick(this.time, this.small);
     setInterval(() => this.interval(), 100);
   }
 }
