@@ -22,7 +22,6 @@ class DigitComponent {
     if (small) {
       document.documentElement.style.setProperty('--column', `2`);
       document.documentElement.style.setProperty('--row', `3`);
-      // change size of digit to 6, 24 for else
     } else {
       document.documentElement.style.setProperty('--column', `4`);
       document.documentElement.style.setProperty('--row', `6`);
@@ -33,21 +32,20 @@ class DigitComponent {
 
     if (currentSize !== targetSize) {
       if (currentSize > targetSize) {
-        // We are downsizing: remove excess cells
         const excessCount = currentSize - targetSize;
         for (let i = 0; i < excessCount; i++) {
           digit.removeChild(currentChildren[currentSize - 1 - i]);
         }
-        currentChildren = El.children(digit); // Re-fetch the reduced list
+        currentChildren = El.children(digit); 
       } else {
-        // We are upsizing: add new cells
         for (let i = currentSize; i < targetSize; i++) {
           digit.appendChild(Cell.create(i));
         }
-        currentChildren = El.children(digit); // Re-fetch the expanded list
+        currentChildren = El.children(digit); 
       }
     }
-    document.documentElement.style.setProperty('--hand-color', `oklch(${Math.random()} 1.0 ${Math.random()*360})`);
+    if (!loading)
+    {document.documentElement.style.setProperty('--hand-color', `oklch(${Math.random()} 1.0 ${Math.random()*360})`);}
 
     El.children(digit)
       .map((node, index) => Cell.tick(node, cell(value, index, small), loading));

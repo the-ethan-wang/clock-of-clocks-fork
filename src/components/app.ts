@@ -7,10 +7,10 @@ class App {
   time: Time = now();
 
   init() {
-    El.append("app", Clock.create(true));
+    El.append("app", Clock.create(false));
 
     Clock.tick(this.time, false, true);
-    setTimeout(() => this.tick(), 3000);
+    setTimeout(() => this.tick(), 2000);
   }
 
   interval() {
