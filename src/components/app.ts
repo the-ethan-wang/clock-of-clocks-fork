@@ -6,12 +6,15 @@ import type { Time } from "$src/types/time";
 import { rotation } from "$src/utilities/digit";
 import { button_rots } from "$src/utilities/digit";
 
+const DELAY_MS = 2000;
+
 class App {
   time: Time = now();
   small: boolean = false;
   mainClock?: HTMLElement;
   btn?: HTMLElement;
-  intervalId?: number; 
+  intervalId?: number;
+  pendingTimeoutId?: number;
 
   init() {
     const clockContainer = document.createElement("div");
@@ -21,8 +24,9 @@ class App {
     this.mainClock = Clock.create(this.small);
     El.append("clock-container", this.mainClock);
     this.createToggleButton();
+
     Clock.tick(this.time, this.small, true);
-    setTimeout(() => this.tick(), 2000);
+    this.scheduleTickWithDelay(DELAY_MS);
   }
 
   createToggleButton() {
@@ -61,12 +65,14 @@ class App {
 
     this.btn.onclick = () => {
       this.small = !this.small;
-      this.clearTick();
+      this.clearAllTimers();
+
       if (this.mainClock) this.mainClock.remove();
       this.mainClock = Clock.create(this.small);
       El.append("clock-container", this.mainClock);
+
       Clock.tick(this.time, this.small, true);
-      setTimeout(() => this.tick(), 2000);
+      this.scheduleTickWithDelay(DELAY_MS);
       this.createToggleButton();
     };
   }
@@ -79,15 +85,40 @@ class App {
   }
 
   tick() {
+    this.clearIntervalOnly();
     Clock.tick(this.time, this.small);
     this.intervalId = window.setInterval(() => this.interval(), 100);
   }
 
-  clearTick() {
-    if (this.intervalId) {
-      clearInterval(this.intervalId);
+  scheduleTickWithDelay(ms: number) {
+    if (this.pendingTimeoutId !== undefined) {
+      window.clearTimeout(this.pendingTimeoutId);
+      this.pendingTimeoutId = undefined;
+    }
+
+    this.pendingTimeoutId = window.setTimeout(() => {
+      this.pendingTimeoutId = undefined;
+      this.tick();
+    }, ms);
+  }
+
+  clearIntervalOnly() {
+    if (this.intervalId !== undefined) {
+      window.clearInterval(this.intervalId);
       this.intervalId = undefined;
     }
+  }
+
+  clearPendingTimeoutOnly() {
+    if (this.pendingTimeoutId !== undefined) {
+      window.clearTimeout(this.pendingTimeoutId);
+      this.pendingTimeoutId = undefined;
+    }
+  }
+
+  clearAllTimers() {
+    this.clearIntervalOnly();
+    this.clearPendingTimeoutOnly();
   }
 }
 
