@@ -2,6 +2,7 @@ import { Cell } from "$src/components/cell";
 import { El } from "$src/components/element";
 import { setDigitSize } from '$src/utilities/digit';
 import { cell } from "$src/utilities/digit";
+import { rotation } from "$src/utilities/digit";
 
 
 
@@ -9,8 +10,14 @@ class DigitComponent {
   create(index: number, small: boolean) {
     let size;
     if (small) {size = 6;} else {size = 24;}
-    let children = Array.from({ length: size }, (_, i) => Cell.create(i));
-
+    const children = Array.from({ length: size }, (_, i) => {
+  const cell = Cell.create(i);
+  const defaultSymbol = "|";
+  const [rot0, rot1] = rotation[defaultSymbol as keyof typeof rotation];
+  Cell.tick(cell, [rot0, rot1], false);
+  return cell;
+});
+    
     return El.create({ 
       type: "div", 
       classes: "digit",
