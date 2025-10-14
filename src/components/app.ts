@@ -11,6 +11,7 @@ class App {
   small: boolean = false;
   mainClock?: HTMLElement;
   btn?: HTMLElement;
+  intervalId?: number; 
 
   init() {
     const clockContainer = document.createElement("div");
@@ -28,7 +29,7 @@ class App {
     if (this.btn) this.btn.remove();
 
     const size = this.small ? 4 : 9;
-    const symbols = this.small ? button_rots["S"] : button_rots["L"] ; 
+    const symbols = this.small ? button_rots["S"] : button_rots["L"];
 
     this.btn = El.create({
       type: "div",
@@ -36,9 +37,16 @@ class App {
       children: Array.from({ length: size }, (_, i) => {
         const cell = Cell.create(i);
         const symbol = symbols[i % symbols.length];
-        Cell.tick(cell, [rotation[symbol as keyof typeof rotation][0], rotation[symbol as keyof typeof rotation][1]], false);
+        Cell.tick(
+          cell,
+          [
+            rotation[symbol as keyof typeof rotation][0],
+            rotation[symbol as keyof typeof rotation][1],
+          ],
+          false
+        );
         return cell;
-      })
+      }),
     });
 
     const gridSize = this.small ? 2 : 3;
@@ -53,14 +61,12 @@ class App {
 
     this.btn.onclick = () => {
       this.small = !this.small;
-
-      // recreate main clock
+      this.clearTick();
       if (this.mainClock) this.mainClock.remove();
       this.mainClock = Clock.create(this.small);
       El.append("clock-container", this.mainClock);
-
-      // animate main clock on toggle
       Clock.tick(this.time, this.small, true);
+      setTimeout(() => this.tick(), 2000);
       this.createToggleButton();
     };
   }
@@ -68,13 +74,20 @@ class App {
   interval() {
     const time = now();
     if (!equal(time, this.time)) {
-      this.time = Clock.tick(time, this.small); 
+      this.time = Clock.tick(time, this.small);
     }
   }
 
   tick() {
     Clock.tick(this.time, this.small);
-    setInterval(() => this.interval(), 100);
+    this.intervalId = window.setInterval(() => this.interval(), 100);
+  }
+
+  clearTick() {
+    if (this.intervalId) {
+      clearInterval(this.intervalId);
+      this.intervalId = undefined;
+    }
   }
 }
 
