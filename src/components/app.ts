@@ -2,8 +2,8 @@ import { ClockController } from "$src/core/clock-controller";
 import { TickManager } from "$src/core/tick-manager";
 import { SizeButton } from "$src/components/size-button";
 
-const INITIAL_DELAY = 2000;
-const TOGGLE_DELAY = 1000;
+const INITIAL_DELAY = 4000;
+const TOGGLE_DELAY = 2000;
 
 class App {
   private clock = new ClockController();
