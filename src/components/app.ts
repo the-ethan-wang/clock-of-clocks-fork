@@ -10,7 +10,7 @@ class App {
     El.append("app", Clock.create(true));
 
     Clock.tick(this.time, false, true);
-    setTimeout(() => this.tick(), 2000);
+    setTimeout(() => this.tick(), 3000);
   }
 
   interval() {

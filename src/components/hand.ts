@@ -5,8 +5,9 @@ class HandComponent {
     return El.create({ type: "div", classes: "hand" });
   }
 
-  tick(hand: HTMLElement, rotation: number, loading: boolean = false, index?: number) {
+  tick(hand: HTMLElement, rotation: number, loading: boolean = false, handIndex?: number, cellIndex?: number) {
     if (loading) {
+      // Cancel any existing animations
       hand.getAnimations().forEach(a => a.cancel());
 
       const clockwise = [
@@ -25,10 +26,13 @@ class HandComponent {
         { rotate: "90deg" },
       ];
 
-      const frames = index === 0 ? clockwise : anticlockwise;
+      const frames = handIndex === 0 ? clockwise : anticlockwise;
+
+      const delay = (cellIndex || 0) * 50; // 50ms per cell offset
 
       hand.animate(frames, {
         duration: 2000,
+        delay,
         iterations: Infinity,
         easing: "ease-in-out"
       });
