@@ -82,12 +82,7 @@ body {
   transition: rotate 250ms;
 }
 
-@media (max-width: 1440px) {
-  :root {
-    --cell-size: 2rem;
-  }
-}
-
+/*
 @media (max-width: 1024px) {
   :root {
     --field-gap: 1rem;
@@ -109,3 +104,4 @@ body {
     --cell-size: 0.75rem;
   }
 }
+*/

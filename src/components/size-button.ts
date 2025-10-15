@@ -1,5 +1,4 @@
 import { Cell } from "$src/components/cell";
-import { El } from "$src/components/element";
 import { rotation, button_rots } from "$src/utilities/digit";
 
 export class SizeButton {

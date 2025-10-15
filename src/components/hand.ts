@@ -47,7 +47,7 @@ class HandComponent {
     } else {
       hand.getAnimations().forEach(a => a.cancel());
       hand.style.rotate = `${rotation}deg`;
-      if (hand.style.rotate === "135deg") {
+      if (`${rotation}` === "135") {
         hand.style.backgroundColor = "oklch(0.2912 0.1291 295.41)"
       } else {
         hand.style.backgroundColor = "oklch(1 100.1916 119.15)"
