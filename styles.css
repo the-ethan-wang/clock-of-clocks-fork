@@ -3,7 +3,6 @@
   --cell-size: 3rem;
   --cell-border-size: max(calc(var(--cell-size) / 16), 1.5px);
   --hand-color: oklch(1 100.1916 119.15);
-  --button-color: oklch(94.75 100.1916 119.15);
 }
 
 * {
@@ -14,7 +13,7 @@
 
 body {
   background-color: oklch(0% 0 0);
-}
+} 
 
 #app {
   height: 100vh;
