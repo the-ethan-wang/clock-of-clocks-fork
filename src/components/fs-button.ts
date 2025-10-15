@@ -2,22 +2,22 @@ import { Cell } from "$src/components/cell";
 import { El } from "$src/components/element";
 import { rotation, button_rots } from "$src/utilities/digit";
 
-export class SizeButton {
+export class FsButton {
   private el?: HTMLElement;
   private onClickCallback?: () => void;
 
   constructor(private small: boolean) {}
 
   create() {
-    const existing = document.getElementById("toggle-size-btn");
+    const existing = document.getElementById("fs-btn");
     if (existing) existing.remove();
 
     const size = this.small ? 4 : 9;
     const symbols = this.small ? button_rots["S"] : button_rots["L"];
 
     const el = document.createElement("div");
-    el.id = "toggle-size-btn";
-    el.classList.add("size-button");
+    el.id = "fs-btn";
+    el.classList.add("fs-button");
 
     const gridSize = this.small ? 2 : 3;
     el.style.display = "grid";
@@ -48,6 +48,7 @@ export class SizeButton {
     if (container) {
       container.appendChild(el);
     }
+
     this.el = el;
     this.el.onclick = () => this.onClickCallback?.();
   }
