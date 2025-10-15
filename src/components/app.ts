@@ -11,6 +11,7 @@ class App {
   private sizeButton?: SizeButton;
 
   init() {
+    let d=document;d.addEventListener("dblclick",()=>d.fullscreenElement?d.exitFullscreen():d.documentElement.requestFullscreen())
     this.clock.mount("app");
     this.createSizeButton();
 
