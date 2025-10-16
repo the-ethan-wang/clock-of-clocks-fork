@@ -62,8 +62,8 @@ class App {
       this.tickManager.clearAll();
       this.clock.toggleSize(this.currentColour);
       this.createSizeButton();
-      this.createSpeedButton();
       this.createFsButton();
+      this.createSpeedButton();
       this.createColourButton();
       this.tickManager.delay(() => this.startTicking(), TOGGLE_DELAY);
     });
