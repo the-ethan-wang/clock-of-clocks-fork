@@ -4,11 +4,11 @@ import { rotation, button_rots } from "$src/utilities/digit";
 export class ColourButton {
   private el?: HTMLElement;
   private onClickCallback?: () => void;
-  private output: string[] = [""];
+  private nextColour: string = "";
   constructor(private small: boolean) {}
 
-  create(colourList: string[], ) {
-    this.output = [""];
+  create(nextColour: string) {
+    this.nextColour = nextColour
     const existing = document.getElementById("colour-btn");
     if (existing) existing.remove();
 
@@ -25,12 +25,7 @@ export class ColourButton {
     el.style.gap = "0.25rem";
     el.style.marginTop = "20px";
     el.style.cursor = "pointer";
-    let e = colourList[0];
-        if (size === 4) {
-          this.output = colourList
-        } else if (size === 9) {
-          this.output = [colourList[0], colourList[0], colourList[1], colourList[1], e, colourList[2], colourList[2], colourList[3], colourList[3]]
-        }
+    
     for (let i = 0; i < size; i++) {
       const cell = Cell.create(i);
       const symbol = symbols[i % symbols.length];
@@ -41,7 +36,7 @@ export class ColourButton {
           rotation[symbol as keyof typeof rotation][0],
           rotation[symbol as keyof typeof rotation][1],
         ],
-        false, this.output[i]
+        false, this.nextColour
       );
 
       el.appendChild(cell);
@@ -64,15 +59,7 @@ export class ColourButton {
       return `oklch(${Math.random() * 0.5 + 0.5} ${Math.random() * 0.4} ${Math.random() * 360})`;
   }
 
-  setColour(colourList:string[]) {
-    const size = this.small ? 4 : 9;
-    let e = colourList[0];
-    if (size === 4) {
-      this.output = colourList
-    } else if (size === 9) {
-      this.output = [colourList[0], colourList[0], colourList[1], colourList[1], e, colourList[2], colourList[2], colourList[3], colourList[3]]
-    }
-    console.log(this.output)
+  setColour(colour: string) {
     if (this.el) {
     for (let i = 0; i < this.el.children.length; i++) {
         const cell = this.el.children.item(i) as HTMLElement;
@@ -85,7 +72,7 @@ export class ColourButton {
               rotation[symbol as keyof typeof rotation][0],
               rotation[symbol as keyof typeof rotation][1],
             ],
-            false, this.output[i]
+            false, colour
           );
         }
       }
