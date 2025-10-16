@@ -32,6 +32,11 @@ export class ClockController {
     }
   }
 
+  forceUpdate(colour: string) {
+    const current = now();
+    this.time = Clock.tick(current, this.small, false, colour);
+  }
+
   animateOnce(colour: string) {
     Clock.tick(this.time, this.small, true, colour);
   }

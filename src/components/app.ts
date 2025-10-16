@@ -40,6 +40,7 @@ class App {
     this.colourButton.create(this.currentColour);
     this.colourButton.onClick(() => {
       this.currentColour = this.colourButton?.getColour()!
+      this.clock.forceUpdate(this.currentColour);
       this.colourButton?.setColour(this.currentColour)
       this.fsButton?.setColour(this.currentColour)
       this.sizeButton?.setColour(this.currentColour)
