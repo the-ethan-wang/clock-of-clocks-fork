@@ -1,5 +1,5 @@
 :root {
-  --scale: 2;
+  --scale: 1;
   --cycle: 250ms;
   --field-gap: calc(var(--scale) * 5rem);
   --cell-size: calc(var(--scale) * 3rem);
