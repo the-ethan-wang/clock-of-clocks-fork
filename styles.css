@@ -26,15 +26,14 @@ body {
 
 #button-container {
   display: flex;
-  justify-content: center; /* Align buttons horizontally */
-  gap: 1rem; /* Space between buttons */
-  align-items: center; /* Align buttons vertically in the center */
+  justify-content: center;
+  gap: 1rem; 
+  align-items: center; 
   margin-top: 20px;
 }
 
 
 #size-button, #fs-button {
-  /* Optional: button-specific styles */
   padding: 0.5rem;
   border: none;
   background-color: #444;

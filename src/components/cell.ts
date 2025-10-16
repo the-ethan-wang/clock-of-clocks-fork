@@ -12,13 +12,13 @@ class CellComponent {
     });
   }
 
-  tick(cell: HTMLElement, rotation: number[], loading: boolean = false) {
+  tick(cell: HTMLElement, rotation: number[], loading: boolean = false, colour:string="") {
     const cellIndex = Number(cell.dataset.index) || 0;
 
     El.children(cell)
       .map((hand, index) => {
         if (index < 2) {
-          Hand.tick(hand, rotation[index], loading, index, cellIndex);
+          Hand.tick(hand, rotation[index], loading, index, cellIndex, colour);
         }
       });
   }

@@ -10,7 +10,8 @@ class HandComponent {
     rotation: number,
     loading: boolean = false,
     handIndex?: number,
-    cellIndex?: number
+    cellIndex?: number,
+    colour: string = "",
   ) {
     if (loading) {
       hand.getAnimations().forEach(a => a.cancel());
@@ -47,11 +48,15 @@ class HandComponent {
     } else {
       hand.getAnimations().forEach(a => a.cancel());
       hand.style.rotate = `${rotation}deg`;
+      if (colour === "") {
       if (`${rotation}` === "135") {
         hand.style.backgroundColor = "oklch(0.2912 0.1291 295.41)"
       } else {
         hand.style.backgroundColor = "oklch(1 100.1916 119.15)"
       }
+    } else {
+      hand.style.backgroundColor = colour
+    }
     }
   }
 }
