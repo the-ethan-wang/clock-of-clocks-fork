@@ -4,6 +4,7 @@ import { SizeButton } from "$src/components/buttons/size-button";
 import { FsButton } from "$src/components/buttons/fs-button";
 import { ColourButton } from "$src/components/buttons/colour-button";
 import { SpeedButton } from "$src/components/buttons/speed-button";
+//import { Analytics } from '@vercel/analytics/next';
 
 const INITIAL_DELAY = 2000;
 const TOGGLE_DELAY = 2000;
