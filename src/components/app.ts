@@ -13,15 +13,15 @@ class App {
   private sizeButton?: SizeButton;
   private fsButton?: FsButton;
   private colourButton?: ColourButton;
-  private currentColour: string = this.colourButton?.getColour()
+  private currentColour: string = this.colourButton?.getColour()!
 
   init() {
     this.clock.mount("app");
+    this.currentColour = `oklch(${Math.random()*0.5+0.5} ${Math.random() * 0.4} ${Math.random() * 360})`
     this.createButtonContainer();
     this.createSizeButton();
     this.createFsButton();
     this.createColourButton();
-    this.currentColour = `oklch(${Math.random()} ${Math.random() * 0.4} ${Math.random() * 360})`
     this.clock.animateOnce(this.currentColour);
     this.tickManager.delay(() => this.startTicking(), INITIAL_DELAY);
   }
@@ -35,13 +35,14 @@ class App {
       }
     }
 
-
   createColourButton() {
     this.colourButton = new ColourButton(this.clock.isSmall());
     this.colourButton.create(this.currentColour);
     this.colourButton.onClick(() => {
-      this.currentColour = this.colourButton?.getColour()
+      this.currentColour = this.colourButton?.getColour()!
       this.colourButton?.setColour(this.currentColour)
+      this.fsButton?.setColour(this.currentColour)
+      this.sizeButton?.setColour(this.currentColour)
       console.log(this.currentColour)
       document.documentElement.style.setProperty('--hand-color', this.currentColour);
     });
@@ -49,7 +50,7 @@ class App {
 
   createSizeButton() {
     this.sizeButton = new SizeButton(this.clock.isSmall());
-    this.sizeButton.create();
+    this.sizeButton.create(this.currentColour);
     this.sizeButton.onClick(() => {
       this.tickManager.clearAll();
       this.clock.toggleSize(this.currentColour);
@@ -62,7 +63,7 @@ class App {
 
   createFsButton() {
     this.fsButton = new FsButton(this.clock.isSmall());
-    this.fsButton.create();
+    this.fsButton.create(this.currentColour);
     this.fsButton.onClick(() => {
       let d = document;
       d.fullscreenElement ? d.exitFullscreen() : d.documentElement.requestFullscreen();

@@ -4,11 +4,12 @@ import { rotation, button_rots } from "$src/utilities/digit";
 export class SizeButton {
   private el?: HTMLElement;
   private onClickCallback?: () => void;
-
+  private currentColour: string = "";
   constructor(private small: boolean) {}
 
-  create() {
+  create(colour:string) {
     const existing = document.getElementById("toggle-size-btn");
+    this.currentColour = colour
     if (existing) existing.remove();
 
     const size = this.small ? 4 : 9;
@@ -37,7 +38,7 @@ export class SizeButton {
           rotation[symbol as keyof typeof rotation][0],
           rotation[symbol as keyof typeof rotation][1],
         ],
-        false
+        false, this.currentColour
       );
       
       el.appendChild(cell);
@@ -62,4 +63,24 @@ export class SizeButton {
     }
     this.onClickCallback = undefined;
   }
+  setColour(colour: String) {
+    if (this.el) {
+    for (let i = 0; i < this.el.children.length; i++) {
+        const cell = this.el.children.item(i);
+        if (cell) {
+          const symbol = button_rots[this.small ? "S" : "L"][i % (this.small ? 4 : 9)];
+
+          // Update the color of each cell using the new color
+          Cell.tick(
+            cell,
+            [
+              rotation[symbol as keyof typeof rotation][0],
+              rotation[symbol as keyof typeof rotation][1],
+            ],
+            false, colour
+          );
+        }
+      }
+  } 
+}
 }

@@ -7,7 +7,7 @@ export class ColourButton {
   private currentColour: string = "";
   constructor(private small: boolean) {}
 
-  create(colour: String) {
+  create(colour: string) {
     this.currentColour = colour
     const existing = document.getElementById("colour-btn");
     if (existing) existing.remove();
