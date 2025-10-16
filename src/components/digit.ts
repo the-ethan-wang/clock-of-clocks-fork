@@ -26,7 +26,7 @@ class DigitComponent {
     });
   }
 
-  tick(digit: HTMLElement, value: string, small: boolean, loading: boolean=false) {
+  tick(digit: HTMLElement, value: string, small: boolean, loading: boolean=false, colour: string) {
     
     setDigitSize(small);
     const targetSize = small ? 6 : 24;
@@ -52,7 +52,7 @@ class DigitComponent {
     {}//setTimeout(function() {if (Math.random() > 0.95) {document.documentElement.style.setProperty('--hand-color', `oklch(${Math.random()} 1.0 ${Math.random()*360})`);}}, 0);}
 
     El.children(digit)
-      .map((node, index) => Cell.tick(node, cell(value, index, small), loading));
+      .map((node, index) => Cell.tick(node, cell(value, index, small), loading, colour));
 
   }
 }

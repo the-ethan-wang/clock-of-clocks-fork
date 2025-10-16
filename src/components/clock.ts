@@ -10,10 +10,10 @@ class ClockComponent {
     return El.create({ type: "div", classes: "clock", children });
   }
 
-  tick(time: Time, small: boolean, loading: boolean=false) {
-    Field.tick("hours", time.hours, small, loading);
-    Field.tick("minutes", time.minutes, small, loading);
-    Field.tick("seconds", time.seconds, small, loading);
+  tick(time: Time, small: boolean, loading: boolean=false, colour: string) {
+    Field.tick("hours", time.hours, small, loading, colour);
+    Field.tick("minutes", time.minutes, small, loading, colour);
+    Field.tick("seconds", time.seconds, small, loading, colour);
 
     return time;
   }

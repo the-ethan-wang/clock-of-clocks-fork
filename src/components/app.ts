@@ -13,6 +13,7 @@ class App {
   private sizeButton?: SizeButton;
   private fsButton?: FsButton;
   private colourButton?: ColourButton;
+  private currentColour: string = this.colourButton?.getColour()
 
   init() {
     this.clock.mount("app");
@@ -20,8 +21,8 @@ class App {
     this.createSizeButton();
     this.createFsButton();
     this.createColourButton();
-
-    this.clock.animateOnce();
+    this.currentColour = `oklch(${Math.random()} ${Math.random() * 0.4} ${Math.random() * 360})`
+    this.clock.animateOnce(this.currentColour);
     this.tickManager.delay(() => this.startTicking(), INITIAL_DELAY);
   }
 
@@ -37,17 +38,21 @@ class App {
 
   createColourButton() {
     this.colourButton = new ColourButton(this.clock.isSmall());
-    this.colourButton.create();
+    this.colourButton.create(this.currentColour);
     this.colourButton.onClick(() => {
-      this.colourButton?.changeColour()
+      this.currentColour = this.colourButton?.getColour()
+      this.colourButton?.setColour(this.currentColour)
+      console.log(this.currentColour)
+      document.documentElement.style.setProperty('--hand-color', this.currentColour);
     });
   }
+
   createSizeButton() {
     this.sizeButton = new SizeButton(this.clock.isSmall());
     this.sizeButton.create();
     this.sizeButton.onClick(() => {
       this.tickManager.clearAll();
-      this.clock.toggleSize();
+      this.clock.toggleSize(this.currentColour);
       this.createSizeButton();
       this.createFsButton();
       this.createColourButton();
@@ -65,8 +70,8 @@ class App {
   }
 
   startTicking() {
-    this.clock.normalTick();
-    this.tickManager.start(() => this.clock.updateIfNeeded());
+    this.clock.normalTick(this.currentColour);
+    this.tickManager.start(() => this.clock.updateIfNeeded(this.currentColour));
   }
 }
 

@@ -17,27 +17,27 @@ export class ClockController {
     El.append("clock-container", this.clockEl);
   }
 
-  toggleSize() {
+  toggleSize(colour: string) {
     this.small = !this.small;
     if (this.clockEl) this.clockEl.remove();
     this.clockEl = Clock.create(this.small);
     El.append("clock-container", this.clockEl);
-    Clock.tick(this.time, this.small, true);
+    Clock.tick(this.time, this.small, true, colour);
   }
 
-  updateIfNeeded() {
+  updateIfNeeded(colour: string) {
     const current = now();
     if (!equal(current, this.time)) {
-      this.time = Clock.tick(current, this.small);
+      this.time = Clock.tick(current, this.small, false, colour);
     }
   }
 
-  animateOnce() {
-    Clock.tick(this.time, this.small, true);
+  animateOnce(colour: string) {
+    Clock.tick(this.time, this.small, true, colour);
   }
 
-  normalTick() {
-    Clock.tick(this.time, this.small);
+  normalTick(colour: string) {
+    Clock.tick(this.time, this.small, false, colour);
   }
 
   isSmall() {

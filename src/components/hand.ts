@@ -13,8 +13,9 @@ class HandComponent {
     cellIndex?: number,
     colour: string = "",
   ) {
+    hand.getAnimations().forEach(a => a.cancel());
     if (loading) {
-      hand.getAnimations().forEach(a => a.cancel());
+      
 
       const clockwise = [
         { rotate: "270deg" },
@@ -45,8 +46,8 @@ class HandComponent {
         iterations: Infinity,
         easing: "ease-in-out"
       });
+      hand.style.backgroundColor = colour
     } else {
-      hand.getAnimations().forEach(a => a.cancel());
       hand.style.rotate = `${rotation}deg`;
       if (colour === "") {
       if (`${rotation}` === "135") {

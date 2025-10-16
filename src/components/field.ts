@@ -11,10 +11,10 @@ class FieldComponent {
     });
   }
 
-  tick(name: string, value: string, small: boolean, loading: boolean=false) {
+  tick(name: string, value: string, small: boolean, loading: boolean=false, colour: string) {
     El.get({ data: { key: "field", value: name } })
       .children
-      .map((digit, index) => Digit.tick(digit, value[index], small, loading));
+      .map((digit, index) => Digit.tick(digit, value[index], small, loading, colour));
   }
 }
 
