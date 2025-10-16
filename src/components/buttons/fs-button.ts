@@ -64,14 +64,13 @@ export class FsButton {
     }
     this.onClickCallback = undefined;
   }
-    setColour(colour: String) {
+    setColour(colour: string) {
     if (this.el) {
     for (let i = 0; i < this.el.children.length; i++) {
-        const cell = this.el.children.item(i);
+        const cell = this.el.children.item(i) as HTMLElement;
         if (cell) {
           const symbol = button_rots[this.small ? "S" : "L"][i % (this.small ? 4 : 9)];
 
-          // Update the color of each cell using the new color
           Cell.tick(
             cell,
             [

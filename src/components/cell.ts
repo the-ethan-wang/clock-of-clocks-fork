@@ -12,7 +12,7 @@ class CellComponent {
     });
   }
 
-  tick(cell: HTMLElement, rotation: number[], loading: boolean = false, colour:string="") {
+  tick(cell: HTMLElement, rotation: number[], loading: boolean = false, colour: string="") {
     const cellIndex = Number(cell.dataset.index) || 0;
 
     El.children(cell)

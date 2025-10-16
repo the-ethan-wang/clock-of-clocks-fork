@@ -14,10 +14,11 @@ class App {
   private fsButton?: FsButton;
   private colourButton?: ColourButton;
   private currentColour: string = this.colourButton?.getColour()!
+  private colourList: string[] = [""];
 
   init() {
     this.clock.mount("app");
-    this.currentColour = `oklch(${Math.random()*0.5+0.5} ${Math.random() * 0.4} ${Math.random() * 360})`
+    this.colourList = Array.from({ length: 4 }, () => `oklch(${Math.random() * 0.5 + 0.5} ${Math.random() * 0.4} ${Math.random() * 360})`);
     this.createButtonContainer();
     this.createSizeButton();
     this.createFsButton();
@@ -37,11 +38,13 @@ class App {
 
   createColourButton() {
     this.colourButton = new ColourButton(this.clock.isSmall());
-    this.colourButton.create(this.currentColour);
+    this.colourButton.create(this.colourList);
     this.colourButton.onClick(() => {
       this.currentColour = this.colourButton?.getColour()!
+      this.colourList.shift();
+      this.colourList.push(this.currentColour)
       this.clock.forceUpdate(this.currentColour);
-      this.colourButton?.setColour(this.currentColour)
+      this.colourButton?.setColour(this.colourList)
       this.fsButton?.setColour(this.currentColour)
       this.sizeButton?.setColour(this.currentColour)
       console.log(this.currentColour)
