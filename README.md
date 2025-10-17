@@ -1,8 +1,8 @@
 # wait why did you do this
 
-i like wanted to try out typescript and react or whatever its cool ok
-i failed forking it somehow so its just from https://github.com/githyperplexed/clock-of-clocks 
-by https://github.com/githyperplexed aka hyperplexed on youtube https://www.youtube.com/c/Hyperplexed
+i like wanted to try out typescript and react or whatever its cool ok  
+i failed forking it somehow so its just from https://github.com/githyperplexed/clock-of-clocks   
+by https://github.com/githyperplexed aka hyperplexed on youtube https://www.youtube.com/c/Hyperplexed  
 
 # Clock Made of Clocks (Recreation)
 
